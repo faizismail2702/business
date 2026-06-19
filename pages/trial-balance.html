@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trial Balance — Trackora Business</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div id="tk-app">
+    <div class="space-y-6">
+
+      <section class="tk-card p-6">
+        <header class="mb-4 flex items-end justify-between gap-4 flex-wrap">
+          <div>
+            <p class="text-xs uppercase tracking-wider font-semibold text-slate-400">Reports</p>
+            <h2 class="text-base font-semibold text-slate-900">Trial Balance</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Ringkasan saldo seluruh akun (hanya entry Posted).</p>
+          </div>
+          <div class="flex items-end gap-2">
+            <div>
+              <label class="tk-label">As Of</label>
+              <input id="f-asOfDate" type="date" data-testid="f-asOfDate" class="tk-input" />
+            </div>
+            <button type="button" id="btn-load-tb" data-testid="btn-load-tb" class="tk-btn tk-btn-primary">Tampilkan</button>
+          </div>
+        </header>
+
+        <div id="tb-status" class="hidden p-3 rounded-md text-sm" data-testid="tb-status"></div>
+      </section>
+
+      <section class="tk-card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="tk-table">
+            <thead>
+              <tr>
+                <th>No. Akun</th>
+                <th>Nama Akun</th>
+                <th>Tipe</th>
+                <th class="text-right">Debit</th>
+                <th class="text-right pr-4">Credit</th>
+              </tr>
+            </thead>
+            <tbody id="tb-tbody" data-testid="tb-tbody"></tbody>
+            <tfoot id="tb-tfoot"></tfoot>
+          </table>
+        </div>
+        <div id="tb-empty" class="p-8 text-center text-sm text-slate-500">
+          Klik "Tampilkan" untuk memuat trial balance.
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/modules/ui.js"></script>
+  <script src="../js/modules/api.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/modules/trial-balance.js"></script>
+</body>
+</html>

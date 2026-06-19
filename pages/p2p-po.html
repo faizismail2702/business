@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purchase Orders — Trackora Business</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div id="tk-app">
+    <div class="space-y-6">
+      <section id="list-view" class="space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-wider font-semibold text-slate-400">P2P</p>
+            <h2 class="text-xl font-semibold text-slate-900">Purchase Orders</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="doc-filter-status" data-testid="doc-filter-status" class="tk-select max-w-[180px]">
+              <option value="">Semua status</option>
+              <option value="draft">Draft</option>
+              <option value="approved">Approved</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button type="button" id="btn-new-doc" data-testid="btn-new-doc" class="tk-btn tk-btn-primary">+ PO Baru</button>
+          </div>
+        </div>
+        <section class="tk-card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="tk-table">
+              <thead>
+                <tr>
+                  <th>PO #</th><th>Tanggal</th><th>Vendor</th><th>Memo</th>
+                  <th class="text-right">Total</th><th>Status</th><th class="text-right pr-4">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="doc-tbody" data-testid="doc-tbody"></tbody>
+            </table>
+          </div>
+          <div id="doc-empty" class="hidden p-8 text-center text-sm text-slate-500">Belum ada PO.</div>
+        </section>
+      </section>
+
+      <section id="form-view" class="space-y-6 hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-wider font-semibold text-slate-400">P2P</p>
+            <h2 id="form-title" class="text-xl font-semibold text-slate-900">Purchase Order Baru</h2>
+            <p id="form-meta" class="text-xs text-slate-500 mt-0.5"></p>
+          </div>
+          <button type="button" id="btn-back-list" data-testid="btn-back-list" class="tk-btn tk-btn-ghost">← Kembali</button>
+        </div>
+
+        <section class="tk-card p-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div><label class="tk-label">Tanggal *</label><input id="f-date" type="date" data-testid="f-date" class="tk-input" required /></div>
+            <div class="md:col-span-2"><label class="tk-label">Vendor *</label><select id="f-vendorId" data-testid="f-vendorId" class="tk-select" required></select></div>
+            <div><label class="tk-label">PR Ref</label><input id="f-prRef" data-testid="f-prRef" class="tk-input" placeholder="PR-000001" /></div>
+            <div class="md:col-span-3"><label class="tk-label">Memo</label><input id="f-memo" data-testid="f-memo" class="tk-input" /></div>
+            <div><label class="tk-label">Reference</label><input id="f-reference" data-testid="f-reference" class="tk-input" /></div>
+          </div>
+        </section>
+
+        <section class="tk-card overflow-hidden">
+          <div class="p-4 flex items-center justify-between border-b border-slate-200">
+            <h3 class="text-sm font-semibold text-slate-900">Lines</h3>
+            <button type="button" id="btn-add-line" data-testid="btn-add-line" class="tk-btn tk-btn-secondary text-xs">+ Tambah Baris</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="tk-table">
+              <thead>
+                <tr><th style="width:32px">#</th><th style="min-width:180px">Item</th><th style="min-width:180px">Account</th><th>Deskripsi</th>
+                  <th class="text-right" style="width:110px">Qty</th><th class="text-right" style="width:140px">Unit Price</th>
+                  <th class="text-right" style="width:140px">Amount</th><th style="width:32px"></th></tr>
+              </thead>
+              <tbody id="doc-lines-tbody" data-testid="doc-lines-tbody"></tbody>
+              <tfoot>
+                <tr class="bg-slate-50 border-t-2 border-slate-200">
+                  <td colspan="6" class="py-2.5 px-3 text-right text-xs uppercase tracking-wider font-semibold text-slate-500">Total</td>
+                  <td class="py-2.5 px-3 text-right font-mono font-semibold text-slate-900" id="doc-total" data-testid="doc-total">0</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+
+        <div class="flex justify-end gap-2">
+          <button type="button" id="btn-save-draft" data-testid="btn-save-draft" class="tk-btn tk-btn-secondary">Simpan Draft</button>
+          <button type="button" id="btn-save-act1"  data-testid="btn-save-act1"  class="tk-btn tk-btn-primary">Simpan &amp; Approve</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/modules/ui.js"></script>
+  <script src="../js/modules/api.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/modules/p2p-shared.js"></script>
+  <script src="../js/modules/p2p-doc.js"></script>
+  <script>
+    P2PDoc.init({
+      navId: 'p2p-po', pageTitle: 'Purchase Orders',
+      pageSubtitle: 'Pesanan pembelian ke vendor',
+      docType: 'PO', hasVendor: true,
+      apiList: 'getPOs', apiGet: 'getPO', apiSave: 'savePO',
+      apiAct1: 'approvePO', apiAct1Label: 'Approve',
+      apiCancel: 'cancelPO', apiDelete: 'deletePO',
+      approvable: true, postable: false
+    });
+  </script>
+</body>
+</html>

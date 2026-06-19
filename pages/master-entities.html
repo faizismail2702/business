@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customers &amp; Vendors — Trackora Business</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div id="tk-app">
+    <div class="space-y-6">
+
+      <!-- Tabs -->
+      <div class="border-b border-slate-200 flex items-center gap-2">
+        <button id="tab-Customer" data-testid="tab-Customer" type="button">Customers</button>
+        <button id="tab-Vendor"   data-testid="tab-Vendor"   type="button">Vendors</button>
+      </div>
+
+      <!-- Form -->
+      <section class="tk-card p-6">
+        <header class="flex items-center justify-between mb-5">
+          <div>
+            <h2 id="entity-form-title" class="text-base font-semibold text-slate-900">Tambah Customer</h2>
+            <p class="text-xs text-slate-500 mt-0.5">
+              <span id="btn-add-label">Customer baru</span> — gunakan tab di atas untuk berpindah jenis.
+            </p>
+          </div>
+          <button type="button" id="btn-cancel-edit" data-testid="btn-cancel-edit"
+                  class="tk-btn tk-btn-ghost hidden">Batal Edit</button>
+        </header>
+
+        <form id="entity-form" data-testid="entity-form" class="grid grid-cols-1 md:grid-cols-6 gap-4">
+          <input id="f-type" type="hidden" data-testid="f-type" value="Customer" />
+
+          <div class="md:col-span-1">
+            <label class="tk-label">Kode</label>
+            <input id="f-code" data-testid="f-code" class="tk-input font-mono" />
+          </div>
+          <div class="md:col-span-3">
+            <label class="tk-label">Nama *</label>
+            <input id="f-name" data-testid="f-name" class="tk-input" required />
+          </div>
+          <div class="md:col-span-2">
+            <label class="tk-label">NPWP / Tax ID</label>
+            <input id="f-taxId" data-testid="f-taxId" class="tk-input" />
+          </div>
+
+          <div class="md:col-span-3">
+            <label class="tk-label">Email</label>
+            <input id="f-email" type="email" data-testid="f-email" class="tk-input" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="tk-label">Telepon</label>
+            <input id="f-phone" data-testid="f-phone" class="tk-input" />
+          </div>
+          <div class="md:col-span-1 flex items-end">
+            <label class="flex items-center gap-2 text-sm text-slate-700">
+              <input id="f-isActive" type="checkbox" data-testid="f-isActive" checked /> Aktif
+            </label>
+          </div>
+
+          <div class="md:col-span-6">
+            <label class="tk-label">Alamat</label>
+            <textarea id="f-address" data-testid="f-address" class="tk-textarea" rows="2"></textarea>
+          </div>
+
+          <div class="md:col-span-6 flex justify-end">
+            <button type="submit" id="btn-save-entity" data-testid="btn-save-entity" class="tk-btn tk-btn-primary">Simpan</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Table -->
+      <section class="tk-card overflow-hidden">
+        <div class="p-4 flex items-center justify-between border-b border-slate-200">
+          <h3 class="text-sm font-semibold text-slate-900">Daftar</h3>
+          <input id="entities-search" data-testid="entities-search" placeholder="Cari nama / email / kode..."
+                 class="tk-input max-w-xs" />
+        </div>
+        <div class="overflow-x-auto">
+          <table class="tk-table">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Telepon</th>
+                <th>Tax ID</th>
+                <th>Status</th>
+                <th class="text-right pr-4">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="entities-tbody" data-testid="entities-tbody"></tbody>
+          </table>
+        </div>
+        <div id="entities-empty" class="hidden p-8 text-center text-sm text-slate-500">
+          Belum ada data.
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/modules/ui.js"></script>
+  <script src="../js/modules/api.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/modules/entities.js"></script>
+</body>
+</html>

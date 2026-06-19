@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>General Ledger — Trackora Business</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div id="tk-app">
+    <div class="space-y-6">
+
+      <!-- Filters -->
+      <section class="tk-card p-6">
+        <header class="mb-4">
+          <p class="text-xs uppercase tracking-wider font-semibold text-slate-400">Reports</p>
+          <h2 class="text-base font-semibold text-slate-900">General Ledger</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Detail transaksi per akun (entry yang sudah Posted).</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="md:col-span-2">
+            <label class="tk-label">Account *</label>
+            <select id="f-account" data-testid="f-account" class="tk-select"></select>
+          </div>
+          <div>
+            <label class="tk-label">Dari</label>
+            <input id="f-from" type="date" data-testid="f-from" class="tk-input" />
+          </div>
+          <div>
+            <label class="tk-label">Sampai</label>
+            <input id="f-to" type="date" data-testid="f-to" class="tk-input" />
+          </div>
+        </div>
+        <div class="mt-4 flex justify-end">
+          <button type="button" id="btn-load-gl" data-testid="btn-load-gl" class="tk-btn tk-btn-primary">Tampilkan</button>
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section id="gl-summary" class="grid grid-cols-2 md:grid-cols-4 gap-4 hidden">
+        <div class="tk-card p-5">
+          <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Opening</p>
+          <p id="gl-opening" data-testid="gl-opening" class="text-lg font-semibold text-slate-900 font-mono mt-1">0</p>
+        </div>
+        <div class="tk-card p-5">
+          <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Total Debit</p>
+          <p id="gl-total-debit" data-testid="gl-total-debit" class="text-lg font-semibold text-slate-900 font-mono mt-1">0</p>
+        </div>
+        <div class="tk-card p-5">
+          <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Total Credit</p>
+          <p id="gl-total-credit" data-testid="gl-total-credit" class="text-lg font-semibold text-slate-900 font-mono mt-1">0</p>
+        </div>
+        <div class="tk-card p-5">
+          <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Closing</p>
+          <p id="gl-closing" data-testid="gl-closing" class="text-lg font-semibold text-slate-900 font-mono mt-1">0</p>
+        </div>
+      </section>
+
+      <!-- Table -->
+      <section class="tk-card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="tk-table">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Entry #</th>
+                <th>Memo / Description</th>
+                <th>Reference</th>
+                <th class="text-right">Debit</th>
+                <th class="text-right">Credit</th>
+                <th class="text-right pr-4">Saldo</th>
+              </tr>
+            </thead>
+            <tbody id="gl-tbody" data-testid="gl-tbody"></tbody>
+          </table>
+        </div>
+        <div id="gl-empty" class="p-8 text-center text-sm text-slate-500">
+          Pilih akun untuk menampilkan general ledger.
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/modules/ui.js"></script>
+  <script src="../js/modules/api.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/modules/general-ledger.js"></script>
+</body>
+</html>

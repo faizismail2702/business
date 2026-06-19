@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chart of Accounts — Trackora Business</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div id="tk-app">
+    <div class="space-y-6">
+
+      <!-- Form -->
+      <section class="tk-card p-6">
+        <header class="flex items-center justify-between mb-5">
+          <div>
+            <h2 id="coa-form-title" class="text-base font-semibold text-slate-900">Tambah Akun</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Definisikan setiap akun pada buku besar.</p>
+          </div>
+          <button type="button" id="btn-cancel-edit" data-testid="btn-cancel-edit"
+                  class="tk-btn tk-btn-ghost hidden">Batal Edit</button>
+        </header>
+
+        <form id="coa-form" data-testid="coa-form" class="grid grid-cols-1 md:grid-cols-6 gap-4">
+          <div class="md:col-span-1">
+            <label class="tk-label">Account # *</label>
+            <input id="f-accountNumber" data-testid="f-accountNumber" class="tk-input font-mono" required />
+          </div>
+          <div class="md:col-span-2">
+            <label class="tk-label">Account Name *</label>
+            <input id="f-accountName" data-testid="f-accountName" class="tk-input" required />
+          </div>
+          <div class="md:col-span-2">
+            <label class="tk-label">Account Type *</label>
+            <select id="f-accountType" data-testid="f-accountType" class="tk-select" required></select>
+          </div>
+          <div class="md:col-span-1 flex items-end">
+            <label class="flex items-center gap-2 text-sm text-slate-700">
+              <input id="f-isActive" type="checkbox" data-testid="f-isActive" checked /> Aktif
+            </label>
+          </div>
+          <div class="md:col-span-6">
+            <label class="tk-label">Deskripsi</label>
+            <textarea id="f-description" data-testid="f-description" class="tk-textarea" rows="2"></textarea>
+          </div>
+          <div class="md:col-span-6 flex justify-end">
+            <button type="submit" id="btn-save-coa" data-testid="btn-save-coa" class="tk-btn tk-btn-primary">Simpan Akun</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Table -->
+      <section class="tk-card overflow-hidden">
+        <div class="p-4 flex items-center justify-between border-b border-slate-200">
+          <h3 class="text-sm font-semibold text-slate-900">Daftar Akun</h3>
+          <input id="coa-search" data-testid="coa-search" placeholder="Cari nomor / nama / tipe..."
+                 class="tk-input max-w-xs" />
+        </div>
+        <div class="overflow-x-auto">
+          <table class="tk-table">
+            <thead>
+              <tr>
+                <th>No. Akun</th>
+                <th>Nama Akun</th>
+                <th>Tipe</th>
+                <th>Deskripsi</th>
+                <th>Status</th>
+                <th class="text-right pr-4">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="coa-tbody" data-testid="coa-tbody"></tbody>
+          </table>
+        </div>
+        <div id="coa-empty" class="hidden p-8 text-center text-sm text-slate-500">
+          Belum ada akun. Tambah akun pertama Anda di atas.
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/modules/ui.js"></script>
+  <script src="../js/modules/api.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/modules/coa.js"></script>
+</body>
+</html>
