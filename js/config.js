@@ -6,7 +6,7 @@
  */
 window.TRACKORA_CONFIG = {
   // Example: "https://script.google.com/macros/s/AKfycbx.../exec"
-  GAS_API_URL: 'REPLACE_WITH_YOUR_GAS_WEBAPP_URL',
+  GAS_API_URL: 'https://script.google.com/macros/s/AKfycbwEiABSi5IboKt251V2hYpy3__gDq4s_Ut8UTsQcZCaVIDcme3zCSYby9Wx5ZB_Bwg/exec',
 
   APP_NAME: 'Trackora Business',
   APP_VERSION: '0.1.0',
