@@ -1,0 +1,82 @@
+/* Trackora — Custom CSS (works alongside Tailwind CDN) */
+
+:root {
+  --tk-bg:        #f8fafc;   /* slate-50 */
+  --tk-surface:   #ffffff;
+  --tk-border:    #e2e8f0;   /* slate-200 */
+  --tk-text:      #0f172a;   /* slate-900 */
+  --tk-text-mute: #64748b;   /* slate-500 */
+  --tk-accent:    #0f172a;   /* slate-900 (sharp ink) */
+  --tk-focus:     #1e293b;
+  --tk-success:   #059669;
+  --tk-danger:    #e11d48;
+}
+
+html, body { background: var(--tk-bg); color: var(--tk-text); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+
+/* Forms */
+.tk-label   { display:block; font-size:12px; font-weight:600; color:#334155; margin-bottom:6px; letter-spacing:.01em; }
+.tk-input,
+.tk-select,
+.tk-textarea {
+  width:100%; padding:8px 10px; font-size:14px; border:1px solid var(--tk-border);
+  border-radius:8px; background:#fff; color:var(--tk-text); transition:border-color .15s, box-shadow .15s, background-color .15s;
+}
+.tk-input:focus, .tk-select:focus, .tk-textarea:focus {
+  outline:none; border-color:#0f172a; box-shadow:0 0 0 3px rgba(15,23,42,.08);
+}
+.tk-textarea { min-height:84px; resize:vertical; }
+.tk-input[readonly], .tk-input:disabled { background:#f1f5f9; cursor:not-allowed; }
+
+/* Buttons */
+.tk-btn {
+  display:inline-flex; align-items:center; gap:6px; padding:8px 14px; font-size:13px;
+  font-weight:600; border-radius:8px; border:1px solid transparent; cursor:pointer; transition:all .15s;
+}
+.tk-btn-primary { background:var(--tk-accent); color:#fff; }
+.tk-btn-primary:hover { background:#1e293b; }
+.tk-btn-secondary { background:#fff; color:#334155; border-color:var(--tk-border); }
+.tk-btn-secondary:hover { background:#f8fafc; }
+.tk-btn-ghost { background:transparent; color:#475569; }
+.tk-btn-ghost:hover { background:#f1f5f9; }
+.tk-btn-danger { background:var(--tk-danger); color:#fff; }
+.tk-btn-danger:hover { background:#be123c; }
+.tk-btn:disabled { opacity:.6; cursor:not-allowed; }
+
+/* Card */
+.tk-card {
+  background:var(--tk-surface); border:1px solid var(--tk-border);
+  border-radius:14px; box-shadow:0 1px 2px rgba(15,23,42,.03);
+}
+
+/* Table */
+.tk-table { width:100%; border-collapse:separate; border-spacing:0; }
+.tk-table thead th {
+  text-align:left; font-size:11px; font-weight:600; color:#64748b;
+  text-transform:uppercase; letter-spacing:.06em;
+  padding:10px 12px; background:#f8fafc; border-bottom:1px solid var(--tk-border);
+  position:sticky; top:0;
+}
+.tk-table tbody td { vertical-align:middle; }
+
+/* Toggle switch */
+.tk-toggle { position:relative; display:inline-flex; align-items:center; cursor:pointer; }
+.tk-toggle input { position:absolute; opacity:0; }
+.tk-toggle .slider {
+  width:38px; height:22px; background:#cbd5e1; border-radius:999px; position:relative; transition:.2s;
+}
+.tk-toggle .slider::after {
+  content:""; position:absolute; top:2px; left:2px; width:18px; height:18px;
+  background:#fff; border-radius:50%; transition:.2s; box-shadow:0 1px 2px rgba(0,0,0,.15);
+}
+.tk-toggle input:checked + .slider { background:#0f172a; }
+.tk-toggle input:checked + .slider::after { transform:translateX(16px); }
+
+/* Toast fade */
+.tk-toast { transition: opacity .6s ease; }
+
+/* Scrollbar (subtle) */
+::-webkit-scrollbar { height:10px; width:10px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:8px; }
+::-webkit-scrollbar-thumb:hover { background:#94a3b8; }
